@@ -1,0 +1,890 @@
+(https://github.com/user-attachments/files/31125348/index.html.html)<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Tracker 🍃💕</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;600;700&family=Chonburi&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --bg: #FBF3EF;
+    --card: #FFFFFF;
+    --rose: #E8899A;
+    --rose-soft: #F6D9DE;
+    --sage: #8FB9A4;
+    --sage-soft: #DCEAE3;
+    --lav: #B49AC7;
+    --lav-soft: #E7DEF0;
+    --gold: #E8B86D;
+    --ink: #4A3B3B;
+    --ink-soft: #9C8A85;
+    --line: #F0E1DA;
+    --shadow: 0 10px 30px -12px rgba(74,59,59,0.18);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background: var(--bg);
+    background-image:
+      radial-gradient(circle at 12% 8%, var(--rose-soft) 0%, transparent 40%),
+      radial-gradient(circle at 90% 85%, var(--sage-soft) 0%, transparent 45%);
+    font-family:'Prompt', sans-serif;
+    color: var(--ink);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding: 28px 16px 60px;
+  }
+
+  .page{ width:100%; max-width:460px; }
+
+  /* ---------- Header / mascot ---------- */
+  .header{ text-align:center; margin-bottom:6px; }
+  .mascot-wrap{
+    width:180px; height:150px; margin:0 auto 4px;
+    position:relative;
+  }
+  .floaty-heart{
+    position:absolute; opacity:0; font-size:14px; pointer-events:none;
+    animation: floatUp 2.6s ease-in forwards;
+  }
+  @keyframes floatUp{
+    0%{ opacity:0; transform: translateY(0) scale(0.6); }
+    15%{ opacity:1; }
+    100%{ opacity:0; transform: translateY(-70px) scale(1.1) rotate(10deg); }
+  }
+
+  h1{
+    font-family:'Chonburi', cursive;
+    font-size: 26px;
+    margin: 4px 0 2px;
+    color: var(--rose);
+    letter-spacing: 0.5px;
+  }
+  .subtitle{
+    font-family:'Mali', cursive;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin: 0 0 16px;
+  }
+
+  /* ---------- Code badge ---------- */
+  .code-badge{
+    display:none;
+    align-items:center;
+    justify-content:center;
+    gap: 8px;
+    background: var(--card);
+    border: 1.5px dashed var(--rose);
+    border-radius: 14px;
+    padding: 8px 12px;
+    margin: 0 0 18px;
+    font-size: 12.5px;
+  }
+  .code-badge .lbl{ color: var(--ink-soft); }
+  .code-badge .val{
+    font-family:'Mali', cursive;
+    font-weight:700;
+    letter-spacing: 1.5px;
+    color: var(--ink);
+    font-size: 14px;
+  }
+  .code-badge button{
+    border:none; background: var(--rose-soft); color:var(--ink);
+    border-radius: 8px; padding: 3px 8px; font-size: 11px; cursor:pointer;
+  }
+  .code-badge button.leave{ background: var(--line); }
+
+  /* ---------- Cards ---------- */
+  .card{
+    background: var(--card);
+    border-radius: 26px;
+    box-shadow: var(--shadow);
+    padding: 20px 18px;
+    margin-bottom: 16px;
+    border: 1px solid var(--line);
+  }
+  .card-title{
+    font-family:'Mali', cursive;
+    font-weight:700;
+    font-size: 17px;
+    display:flex; align-items:center; gap:6px;
+    margin: 0 0 4px;
+  }
+  .today-date{
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin: 0 0 16px;
+  }
+
+  /* ---------- Gate (couple code) ---------- */
+  .gate-card{ text-align:center; }
+  .gate-desc{
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    line-height:1.6;
+    margin: 0 0 18px;
+  }
+  .primary-btn{
+    width:100%;
+    border:none;
+    border-radius: 16px;
+    padding: 13px;
+    font-family:'Mali', cursive;
+    font-weight:700;
+    font-size: 15px;
+    color:#fff;
+    background: linear-gradient(135deg, var(--rose), var(--sage));
+    cursor:pointer;
+    transition: transform .15s ease, opacity .15s ease;
+  }
+  .primary-btn:hover{ transform: translateY(-1px); opacity:0.94; }
+  .primary-btn.outline{
+    background: #fff;
+    color: var(--ink);
+    border: 1.5px solid var(--line);
+  }
+  .gate-divider{
+    display:flex; align-items:center; gap:10px;
+    color: var(--ink-soft); font-size: 12px;
+    margin: 18px 0 14px;
+  }
+  .gate-divider::before, .gate-divider::after{
+    content:''; flex:1; height:1px; background: var(--line);
+  }
+  .code-input{
+    width:100%;
+    border: 1.5px solid var(--line);
+    border-radius: 14px;
+    padding: 12px;
+    text-align:center;
+    font-family:'Mali', cursive;
+    font-weight:700;
+    letter-spacing: 3px;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .code-input:focus{ outline:none; border-color: var(--rose); }
+  .gate-hint{
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    margin: 16px 0 0;
+    line-height:1.6;
+  }
+  .new-code-reveal{
+    background: var(--rose-soft);
+    border-radius: 16px;
+    padding: 14px;
+    margin-bottom: 14px;
+  }
+  .new-code-reveal .code-big{
+    font-family:'Chonburi', cursive;
+    font-size: 26px;
+    letter-spacing: 3px;
+    color: var(--ink);
+    margin: 4px 0 10px;
+  }
+  .new-code-reveal p{ font-size:12px; color: var(--ink-soft); margin:0 0 10px; }
+
+  /* ---------- People row ---------- */
+  .people{
+    display:flex;
+    gap: 12px;
+  }
+  .person{
+    flex:1;
+    background: #FFFDFC;
+    border: 1.5px solid var(--line);
+    border-radius: 20px;
+    padding: 14px 10px 16px;
+    text-align:center;
+    transition: border-color .2s ease, transform .2s ease;
+  }
+  .person[data-gender="female"]{ --accent: var(--rose); --accent-soft: var(--rose-soft); }
+  .person[data-gender="male"]{ --accent: var(--sage); --accent-soft: var(--sage-soft); }
+  .person[data-gender="other"]{ --accent: var(--lav); --accent-soft: var(--lav-soft); }
+
+  .avatar{
+    width:56px; height:56px; display:block;
+  }
+  .avatar-wrap{
+    position: relative;
+    width: 56px; height: 56px;
+    margin: 0 auto 6px;
+  }
+  .avatar-photo{
+    width:56px; height:56px; border-radius:50%; object-fit:cover; display:block;
+    border: 2px solid #fff; box-shadow: 0 0 0 1.5px var(--accent);
+  }
+  .avatar-edit-btn{
+    position:absolute; bottom:-2px; right:-4px;
+    width:20px; height:20px; border-radius:50%;
+    background: var(--card); border: 1.5px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    font-size:10px; cursor:pointer; padding:0;
+  }
+  .avatar-remove-btn{
+    position:absolute; top:-4px; right:-4px;
+    width:16px; height:16px; border-radius:50%;
+    background: var(--ink); color:#fff; border:none;
+    font-size:10px; line-height:1; cursor:pointer; padding:0;
+    display:flex; align-items:center; justify-content:center;
+  }
+
+  .gender-select{
+    display:flex;
+    justify-content:center;
+    gap: 4px;
+    margin-bottom: 8px;
+  }
+  .gender-btn{
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    border: 1.5px solid var(--line);
+    background: #fff;
+    font-size: 12px;
+    cursor: pointer;
+    display:flex; align-items:center; justify-content:center;
+    color: var(--ink-soft);
+    transition: all .15s ease;
+    padding: 0;
+  }
+  .gender-btn.active[data-g="female"]{ background: var(--rose-soft); border-color: var(--rose); color: var(--ink); }
+  .gender-btn.active[data-g="male"]{ background: var(--sage-soft); border-color: var(--sage); color: var(--ink); }
+  .gender-btn.active[data-g="other"]{ background: var(--lav-soft); border-color: var(--lav); color: var(--ink); }
+
+  .name-input{
+    font-family:'Mali', cursive;
+    font-weight:600;
+    font-size: 14.5px;
+    text-align:center;
+    border:none;
+    background:transparent;
+    color: var(--ink);
+    width: 100%;
+    border-bottom: 1.5px dashed transparent;
+    padding-bottom: 2px;
+    margin-bottom: 10px;
+  }
+  .name-input:focus{ outline:none; border-bottom-color: var(--accent); }
+
+  .toggle-btn{
+    width:100%;
+    border: 1.5px solid var(--line);
+    background: #fff;
+    border-radius: 14px;
+    padding: 9px 6px;
+    font-family:'Prompt', sans-serif;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    cursor:pointer;
+    margin-top: 8px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    transition: all .18s ease;
+  }
+  .toggle-btn:first-of-type{ margin-top: 0; }
+  .toggle-btn:hover{ transform: translateY(-1px); }
+  .toggle-btn.active{
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--ink);
+    font-weight:600;
+  }
+  .toggle-btn .ic{ font-size:14px; }
+
+  /* ---------- Streak ---------- */
+  .streak-row{
+    display:flex; align-items:center; gap: 14px;
+  }
+  .streak-num{
+    font-family:'Chonburi', cursive;
+    font-size: 34px;
+    color: var(--gold);
+    line-height:1;
+    min-width: 54px;
+  }
+  .streak-text{
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height:1.5;
+  }
+  .streak-text b{ color: var(--ink); }
+
+  /* ---------- Calendar ---------- */
+  .cal-head{
+    display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;
+  }
+  .cal-nav{
+    background:none; border:none; cursor:pointer; font-size:16px;
+    color: var(--ink-soft); padding:4px 8px; border-radius:8px;
+  }
+  .cal-nav:hover{ background: var(--line); }
+  .cal-month{ font-family:'Mali',cursive; font-weight:700; font-size:14.5px; }
+
+  .cal-grid{
+    display:grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    text-align:center;
+  }
+  .cal-dow{
+    font-size: 10.5px;
+    color: var(--ink-soft);
+    padding-bottom: 4px;
+  }
+  .cal-day{
+    aspect-ratio: 1;
+    display:flex; align-items:center; justify-content:center;
+    font-size: 10.5px;
+    border-radius: 10px;
+    position:relative;
+    color: var(--ink-soft);
+  }
+  .cal-day.empty{ visibility:hidden; }
+  .cal-day.today{ box-shadow: inset 0 0 0 1.5px var(--rose); font-weight:600; color: var(--ink); }
+  .cal-day.full{ background: linear-gradient(135deg, var(--rose-soft), var(--sage-soft)); color: var(--ink); font-weight:600; }
+  .cal-day.half{ background: var(--rose-soft); color: var(--ink); }
+  .cal-day .heart-mark{ position:absolute; bottom:1px; font-size:8px; }
+
+  .legend{
+    display:flex; gap:14px; margin-top:14px; font-size:11px; color:var(--ink-soft); flex-wrap:wrap;
+  }
+  .legend span{ display:inline-flex; align-items:center; gap:5px; }
+  .dot{ width:9px; height:9px; border-radius:3px; display:inline-block; }
+  .dot.full{ background: linear-gradient(135deg, var(--rose), var(--sage)); }
+  .dot.half{ background: var(--rose-soft); border:1px solid var(--rose); }
+  .dot.none{ background:#fff; border:1px solid var(--line); }
+
+  footer{
+    text-align:center;
+    font-family:'Mali', cursive;
+    font-size:12px;
+    color: var(--ink-soft);
+    margin-top: 18px;
+  }
+
+  .loading{
+    text-align:center; color: var(--ink-soft); font-size:13px; padding: 30px 0;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .floaty-heart{ animation: none; opacity:0; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="mascot-wrap" id="mascotWrap">
+      <svg viewBox="0 0 180 150" width="180" height="150" id="mascotSvg">
+        <ellipse cx="90" cy="132" rx="58" ry="7" fill="#4A3B3B" opacity="0.06"/>
+
+        <g id="p1Fig">
+          <path id="p1Body" d="M50 95 Q50 78 68 78 Q86 78 86 95 L86 122 Q86 130 78 130 L58 130 Q50 130 50 122 Z" fill="#F6D9DE"/>
+          <path id="p1Arm" d="M82 100 Q95 100 100 112" stroke="#F6D9DE" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <circle cx="68" cy="58" r="26" fill="#FCEAE3"/>
+          <g id="p1Hair"></g>
+          <circle cx="55" cy="64" r="5" id="p1BlushL" fill="#E8899A" opacity="0.55"/>
+          <circle cx="81" cy="64" r="5" id="p1BlushR" fill="#E8899A" opacity="0.55"/>
+          <g id="p1EyesOpen">
+            <circle cx="59" cy="58" r="2.6" fill="#4A3B3B"/>
+            <circle cx="77" cy="58" r="2.6" fill="#4A3B3B"/>
+          </g>
+          <g id="p1EyesHappy" style="display:none;">
+            <path d="M55 58 Q59 53 63 58" stroke="#4A3B3B" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+            <path d="M73 58 Q77 53 81 58" stroke="#4A3B3B" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+          </g>
+          <path d="M64 68 Q68 71 72 68" stroke="#4A3B3B" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        </g>
+
+        <g id="p2Fig">
+          <path id="p2Body" d="M94 95 Q94 78 112 78 Q130 78 130 95 L130 122 Q130 130 122 130 L102 130 Q94 130 94 122 Z" fill="#DCEAE3"/>
+          <path id="p2Arm" d="M98 100 Q85 100 80 112" stroke="#DCEAE3" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <circle cx="112" cy="58" r="26" fill="#FCEAE3"/>
+          <g id="p2Hair"></g>
+          <circle cx="99" cy="64" r="5" id="p2BlushL" fill="#8FB9A4" opacity="0.5"/>
+          <circle cx="125" cy="64" r="5" id="p2BlushR" fill="#8FB9A4" opacity="0.5"/>
+          <g id="p2EyesOpen">
+            <circle cx="103" cy="58" r="2.6" fill="#4A3B3B"/>
+            <circle cx="121" cy="58" r="2.6" fill="#4A3B3B"/>
+          </g>
+          <g id="p2EyesHappy" style="display:none;">
+            <path d="M99 58 Q103 53 107 58" stroke="#4A3B3B" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+            <path d="M117 58 Q121 53 125 58" stroke="#4A3B3B" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+          </g>
+          <path d="M108 68 Q112 71 116 68" stroke="#4A3B3B" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        </g>
+
+        <circle cx="90" cy="108" r="5" fill="#E8899A" opacity="0" id="handHeart"/>
+      </svg>
+    </div>
+    <h1>Love Tracker</h1>
+    <p class="subtitle">วันนี้บอกรัก...หรือคิดถึงกันหรือยังนะ? 🍃</p>
+  </div>
+
+  <div class="code-badge" id="codeBadge">
+    <span class="lbl">รหัสคู่:</span>
+    <span class="val" id="codeBadgeVal">------</span>
+    <button id="copyCodeBtn">คัดลอก</button>
+    <button class="leave" id="leaveCodeBtn">เปลี่ยนรหัส</button>
+  </div>
+
+  <div id="app">
+    <div class="loading">กำลังโหลด...</div>
+  </div>
+
+  <footer>เก็บทุกวันเล็กๆ ที่รักกัน 🤍</footer>
+</div>
+
+<script>
+(function(){
+  const DOW = ['อา','จ','อ','พ','พฤ','ศ','ส'];
+  const MONTH_TH = ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+  const GENDER_META = {
+    female: { hairColor:'#B5615F', accent:'#E8899A', accentSoft:'#F6D9DE', bodyColor:'#F6D9DE', label:'หญิง', icon:'♀' },
+    male:   { hairColor:'#5B4A42', accent:'#8FB9A4', accentSoft:'#DCEAE3', bodyColor:'#DCEAE3', label:'ชาย', icon:'♂' },
+    other:  { hairColor:'#8A73A1', accent:'#B49AC7', accentSoft:'#E7DEF0', bodyColor:'#E7DEF0', label:'อื่นๆ', icon:'✦' }
+  };
+  const CODE_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // no O/0/I/1 to avoid confusion
+
+  let coupleCode = null;
+  let viewDate = new Date();
+  let profiles = {
+    p1: { name: 'เธอ', gender: 'female', photo: null },
+    p2: { name: 'เขา', gender: 'male', photo: null }
+  };
+  let monthCache = {};
+
+  function pad(n){ return n<10 ? '0'+n : ''+n; }
+  function dateKey(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+  function monthStorageKey(d){ return 'checkins:'+coupleCode+':'+d.getFullYear()+'-'+pad(d.getMonth()+1); }
+  function profilesStorageKey(){ return 'profiles:'+coupleCode; }
+  function todayKey(){ return dateKey(new Date()); }
+
+  function generateCode(){
+    return '250769';
+  }
+
+  /* ---------------- Gate (couple code) ---------------- */
+
+  function renderGate(justCreatedCode){
+    const app = document.getElementById('app');
+    document.getElementById('codeBadge').style.display = 'none';
+
+    if(justCreatedCode){
+      app.innerHTML = `
+        <div class="card gate-card">
+          <div class="card-title" style="justify-content:center;">💕 สร้างคู่สำเร็จแล้ว</div>
+          <div class="new-code-reveal">
+            <p>รหัสคู่ของคุณคือ</p>
+            <div class="code-big">${justCreatedCode}</div>
+            <p>ส่งรหัสนี้ให้แฟนของคุณ เพื่อเชื่อมข้อมูลเข้าด้วยกัน</p>
+            <button class="primary-btn" id="copyNewCodeBtn">📋 คัดลอกรหัส</button>
+          </div>
+          <button class="primary-btn outline" id="continueBtn">เริ่มใช้งาน →</button>
+          <p class="gate-hint">⚠️ จำรหัสนี้ไว้ให้ดี ต้องกรอกรหัสเดิมทุกครั้งที่เปิดหน้านี้ใหม่ เพื่อเข้าถึงข้อมูลของคุณสองคน ไม่มีใครแก้ไขได้นอกจากคนที่มีรหัสนี้</p>
+        </div>
+      `;
+      document.getElementById('copyNewCodeBtn').addEventListener('click', ()=> copyText(justCreatedCode, document.getElementById('copyNewCodeBtn')));
+      document.getElementById('continueBtn').addEventListener('click', ()=> enterApp());
+      return;
+    }
+
+    app.innerHTML = `
+      <div class="card gate-card">
+        <div class="card-title" style="justify-content:center;">🔐 เชื่อมต่อคู่ของคุณ</div>
+        <p class="gate-desc">ใส่ "รหัสคู่รัก" เพื่อให้ข้อมูลของคุณสองคนเป็นส่วนตัว ไม่ให้คนอื่นเข้ามาดูหรือแก้ไขได้</p>
+        <button class="primary-btn" id="createCodeBtn">✨ สร้างรหัสคู่ใหม่</button>
+        <div class="gate-divider">หรือถ้ามีรหัสอยู่แล้ว</div>
+        <input class="code-input" id="joinCodeInput" placeholder="กรอกรหัสคู่" maxlength="8">
+        <button class="primary-btn outline" id="joinCodeBtn">เชื่อมต่อด้วยรหัสนี้</button>
+        <p class="gate-hint">💡 ต้องกรอกรหัสเดิมทุกครั้งที่เปิดหน้านี้ใหม่ แนะนำให้บันทึกรหัสไว้ในที่ที่หาเจอง่าย</p>
+      </div>
+    `;
+    document.getElementById('createCodeBtn').addEventListener('click', ()=>{
+      coupleCode = generateCode();
+      renderGate(coupleCode);
+    });
+    document.getElementById('joinCodeBtn').addEventListener('click', ()=>{
+      const val = document.getElementById('joinCodeInput').value.trim().toUpperCase();
+      if(!val){ document.getElementById('joinCodeInput').focus(); return; }
+      coupleCode = val;
+      enterApp();
+    });
+    document.getElementById('joinCodeInput').addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter') document.getElementById('joinCodeBtn').click();
+    });
+  }
+
+  function copyText(text, btnEl){
+    const done = ()=>{
+      if(btnEl){ const orig = btnEl.textContent; btnEl.textContent = 'คัดลอกแล้ว ✓'; setTimeout(()=> btnEl.textContent = orig, 1500); }
+    };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done).catch(()=> fallbackCopy(text, done));
+    } else {
+      fallbackCopy(text, done);
+    }
+  }
+  function fallbackCopy(text, cb){
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); }catch(e){}
+    document.body.removeChild(ta);
+    if(cb) cb();
+  }
+
+  async function enterApp(){
+    document.getElementById('codeBadge').style.display = 'flex';
+    document.getElementById('codeBadgeVal').textContent = coupleCode;
+    monthCache = {};
+    await loadProfiles();
+    await render();
+  }
+
+  document.getElementById('copyCodeBtn').addEventListener('click', (e)=> copyText(coupleCode, e.target));
+  document.getElementById('leaveCodeBtn').addEventListener('click', ()=>{
+    if(confirm('ต้องการเปลี่ยนรหัสคู่หรือไม่? หน้านี้จะกลับไปหน้ากรอกรหัส')){
+      coupleCode = null;
+      monthCache = {};
+      renderGate(null);
+    }
+  });
+
+  /* ---------------- Storage ---------------- */
+
+  async function loadProfiles(){
+    try{
+      const r = await window.storage.get(profilesStorageKey(), true);
+      if(r && r.value){
+        const loaded = JSON.parse(r.value);
+        profiles.p1 = Object.assign({}, profiles.p1, loaded.p1);
+        profiles.p2 = Object.assign({}, profiles.p2, loaded.p2);
+      }
+    }catch(e){ /* not set yet, use defaults */ }
+  }
+
+  async function saveProfiles(){
+    try{ await window.storage.set(profilesStorageKey(), JSON.stringify(profiles), true); }
+    catch(e){ console.error('save profiles failed', e); }
+  }
+
+  async function loadMonth(d){
+    const key = monthStorageKey(d);
+    if(monthCache[key]) return monthCache[key];
+    let data = { days: {} };
+    try{
+      const r = await window.storage.get(key, true);
+      if(r && r.value){ data = JSON.parse(r.value); }
+    }catch(e){ /* no data yet for this month */ }
+    monthCache[key] = data;
+    return data;
+  }
+
+  async function saveMonth(d){
+    const key = monthStorageKey(d);
+    try{ await window.storage.set(key, JSON.stringify(monthCache[key]), true); }
+    catch(e){ console.error('save month failed', e); }
+  }
+
+  function getDayEntry(monthData, key){
+    if(!monthData.days[key]){
+      monthData.days[key] = { p1:{love:false,miss:false}, p2:{love:false,miss:false} };
+    }
+    return monthData.days[key];
+  }
+
+  async function toggle(person, field){
+    const now = new Date();
+    const data = await loadMonth(now);
+    const entry = getDayEntry(data, todayKey());
+    entry[person][field] = !entry[person][field];
+    await saveMonth(now);
+    await render();
+    if(field === 'love' && entry.p1.love && entry.p2.love){
+      celebrateHearts();
+    }
+  }
+
+  async function setGender(person, gender){
+    profiles[person].gender = gender;
+    await saveProfiles();
+    await render();
+  }
+
+  /* ---------------- Photo upload ---------------- */
+
+  function resizeImage(file){
+    return new Promise((resolve, reject)=>{
+      const reader = new FileReader();
+      reader.onload = (e)=>{
+        const img = new Image();
+        img.onload = ()=>{
+          const size = 160;
+          const canvas = document.createElement('canvas');
+          canvas.width = size; canvas.height = size;
+          const ctx = canvas.getContext('2d');
+          const minSide = Math.min(img.width, img.height);
+          const sx = (img.width - minSide) / 2;
+          const sy = (img.height - minSide) / 2;
+          ctx.drawImage(img, sx, sy, minSide, minSide, 0, 0, size, size);
+          resolve(canvas.toDataURL('image/jpeg', 0.82));
+        };
+        img.onerror = ()=> reject(new Error('image load failed'));
+        img.src = e.target.result;
+      };
+      reader.onerror = ()=> reject(new Error('file read failed'));
+      reader.readAsDataURL(file);
+    });
+  }
+
+  async function handlePhotoChange(person, file){
+    if(!file) return;
+    try{
+      const dataUrl = await resizeImage(file);
+      profiles[person].photo = dataUrl;
+      await saveProfiles();
+      await render();
+    }catch(err){
+      console.error(err);
+      alert('ไม่สามารถโหลดรูปนี้ได้ ลองรูปอื่นดูนะ');
+    }
+  }
+
+  async function removePhoto(person){
+    profiles[person].photo = null;
+    await saveProfiles();
+    await render();
+  }
+
+  function celebrateHearts(){
+    const wrap = document.getElementById('mascotWrap');
+    const emojis = ['💕','💗','💖'];
+    for(let i=0;i<5;i++){
+      const el = document.createElement('div');
+      el.className = 'floaty-heart';
+      el.textContent = emojis[i % emojis.length];
+      el.style.left = (30 + Math.random()*120) + 'px';
+      el.style.top = (60 + Math.random()*20) + 'px';
+      el.style.animationDelay = (i*0.12)+'s';
+      wrap.appendChild(el);
+      setTimeout(()=> el.remove(), 3000);
+    }
+  }
+
+  function setMascotMood(bothLoveToday){
+    ['p1','p2'].forEach(who=>{
+      const open = document.getElementById(who+'EyesOpen');
+      const happy = document.getElementById(who+'EyesHappy');
+      if(bothLoveToday){ open.style.display='none'; happy.style.display='inline'; }
+      else { open.style.display='inline'; happy.style.display='none'; }
+    });
+    document.getElementById('handHeart').setAttribute('opacity', bothLoveToday ? '1' : '0');
+  }
+
+  function hairSvg(who, gender){
+    const cx = who === 'p1' ? 68 : 112;
+    const meta = GENDER_META[gender];
+    const c = meta.hairColor;
+    if(gender === 'female'){
+      return `<path d="M${cx-26} 58 Q${cx-28} 30 ${cx} 28 Q${cx+28} 30 ${cx+26} 58 Q${cx+26} 44 ${cx} 44 Q${cx-26} 44 ${cx-26} 58 Z" fill="${c}"/>
+              <circle cx="${cx-24}" cy="40" r="9" fill="${c}"/>
+              <circle cx="${cx+24}" cy="40" r="9" fill="${c}"/>`;
+    }
+    if(gender === 'male'){
+      return `<path d="M${cx-26} 54 Q${cx-26} 28 ${cx} 28 Q${cx+26} 28 ${cx+26} 54 Q${cx+26} 42 ${cx} 40 Q${cx-26} 42 ${cx-26} 54 Z" fill="${c}"/>`;
+    }
+    return `<path d="M${cx-26} 52 Q${cx-27} 26 ${cx} 27 Q${cx+27} 26 ${cx+26} 52 Q${cx+26} 40 ${cx} 38 Q${cx-26} 40 ${cx-26} 52 Z" fill="${c}"/>
+            <circle cx="${cx-19}" cy="30" r="3.5" fill="${c}"/>
+            <circle cx="${cx+19}" cy="30" r="3.5" fill="${c}"/>`;
+  }
+
+  function avatarSvg(gender){
+    const meta = GENDER_META[gender];
+    const c = meta.hairColor;
+    let hair;
+    if(gender === 'female'){
+      hair = `<path d="M8 26 Q6 8 28 6 Q50 8 48 26 Q48 16 28 16 Q8 16 8 26Z" fill="${c}"/><circle cx="10" cy="14" r="6" fill="${c}"/><circle cx="46" cy="14" r="6" fill="${c}"/>`;
+    } else if(gender === 'male'){
+      hair = `<path d="M8 22 Q8 4 28 4 Q48 4 48 22 Q48 14 28 12 Q8 14 8 22Z" fill="${c}"/>`;
+    } else {
+      hair = `<path d="M8 24 Q7 4 28 5 Q49 4 48 24 Q48 14 28 13 Q8 14 8 24Z" fill="${c}"/><circle cx="12" cy="12" r="3" fill="${c}"/><circle cx="44" cy="12" r="3" fill="${c}"/>`;
+    }
+    return `<svg class="avatar" viewBox="0 0 56 56"><circle cx="28" cy="26" r="20" fill="#FCEAE3"/>${hair}<circle cx="20" cy="28" r="2" fill="#4A3B3B"/><circle cx="36" cy="28" r="2" fill="#4A3B3B"/></svg>`;
+  }
+
+  function updateMascotFigure(who, gender){
+    const meta = GENDER_META[gender];
+    document.getElementById(who+'Hair').innerHTML = hairSvg(who, gender);
+    document.getElementById(who+'Body').setAttribute('fill', meta.bodyColor);
+    document.getElementById(who+'Arm').setAttribute('stroke', meta.bodyColor);
+    document.getElementById(who+'BlushL').setAttribute('fill', meta.accent);
+    document.getElementById(who+'BlushR').setAttribute('fill', meta.accent);
+  }
+
+  async function render(){
+    const app = document.getElementById('app');
+    const now = new Date();
+    const data = await loadMonth(viewDate);
+    const todayMonthData = await loadMonth(now);
+    const todayEntry = getDayEntry(todayMonthData, todayKey());
+
+    updateMascotFigure('p1', profiles.p1.gender);
+    updateMascotFigure('p2', profiles.p2.gender);
+    setMascotMood(todayEntry.p1.love && todayEntry.p2.love);
+
+    let streak = 0;
+    let c2 = new Date();
+    for(let i=0;i<400;i++){
+      const key = dateKey(c2);
+      const mData = await loadMonth(c2);
+      const e = mData.days[key];
+      const both = !!(e && e.p1.love && e.p2.love);
+      if(both){ streak++; c2.setDate(c2.getDate()-1); }
+      else break;
+    }
+
+    const y = viewDate.getFullYear(), m = viewDate.getMonth();
+    const firstDow = new Date(y,m,1).getDay();
+    const daysInMonth = new Date(y,m+1,0).getDate();
+    const isCurrentMonth = (y===now.getFullYear() && m===now.getMonth());
+
+    let calCells = '';
+    for(let i=0;i<firstDow;i++){ calCells += '<div class="cal-day empty"></div>'; }
+    for(let d=1; d<=daysInMonth; d++){
+      const key = y+'-'+pad(m+1)+'-'+pad(d);
+      const e = data.days[key];
+      let cls = 'cal-day';
+      let mark = '';
+      if(e && e.p1.love && e.p2.love){ cls += ' full'; mark = '<span class="heart-mark">💕</span>'; }
+      else if(e && (e.p1.love || e.p2.love)){ cls += ' half'; }
+      if(isCurrentMonth && d === now.getDate()) cls += ' today';
+      calCells += `<div class="${cls}">${d}${mark}</div>`;
+    }
+
+    function genderButtons(person){
+      return Object.keys(GENDER_META).map(g=>{
+        const active = profiles[person].gender === g ? 'active' : '';
+        return `<button class="gender-btn ${active}" data-g="${g}" data-person="${person}" title="${GENDER_META[g].label}">${GENDER_META[g].icon}</button>`;
+      }).join('');
+    }
+
+    function avatarBlock(person){
+      const p = profiles[person];
+      const photoHtml = p.photo
+        ? `<img class="avatar-photo" src="${p.photo}">`
+        : avatarSvg(p.gender);
+      const removeBtn = p.photo
+        ? `<button class="avatar-remove-btn" data-person="${person}" data-action="remove-photo" title="ลบรูป">×</button>`
+        : '';
+      return `
+        <div class="avatar-wrap">
+          ${photoHtml}
+          ${removeBtn}
+          <button class="avatar-edit-btn" data-person="${person}" data-action="pick-photo" title="เปลี่ยนรูป">📷</button>
+          <input type="file" accept="image/*" class="photo-input" data-person="${person}" style="display:none">
+        </div>`;
+    }
+
+    app.innerHTML = `
+      <div class="card">
+        <div class="card-title">💌 วันนี้</div>
+        <p class="today-date">${now.getDate()} ${MONTH_TH[now.getMonth()]} ${now.getFullYear()+543}</p>
+        <div class="people">
+          <div class="person" data-gender="${profiles.p1.gender}">
+            ${avatarBlock('p1')}
+            <div class="gender-select" data-person="p1">${genderButtons('p1')}</div>
+            <input class="name-input" id="p1Name" value="${escapeHtml(profiles.p1.name)}" maxlength="12">
+            <button class="toggle-btn ${todayEntry.p1.love?'active':''}" data-person="p1" data-field="love"><span class="ic">💗</span> บอกรักแล้ว</button>
+            <button class="toggle-btn ${todayEntry.p1.miss?'active':''}" data-person="p1" data-field="miss"><span class="ic">🍃</span> คิดถึงแล้ว</button>
+          </div>
+          <div class="person" data-gender="${profiles.p2.gender}">
+            ${avatarBlock('p2')}
+            <div class="gender-select" data-person="p2">${genderButtons('p2')}</div>
+            <input class="name-input" id="p2Name" value="${escapeHtml(profiles.p2.name)}" maxlength="12">
+            <button class="toggle-btn ${todayEntry.p2.love?'active':''}" data-person="p2" data-field="love"><span class="ic">💗</span> บอกรักแล้ว</button>
+            <button class="toggle-btn ${todayEntry.p2.miss?'active':''}" data-person="p2" data-field="miss"><span class="ic">🍃</span> คิดถึงแล้ว</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="streak-row">
+          <div class="streak-num">${streak}</div>
+          <div class="streak-text">วันติดต่อกัน ที่ทั้งคู่<br><b>บอกรัก</b>กันทุกวัน 🔥</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="cal-head">
+          <button class="cal-nav" id="prevMonth">‹</button>
+          <div class="cal-month">${MONTH_TH[m]} ${y+543}</div>
+          <button class="cal-nav" id="nextMonth">›</button>
+        </div>
+        <div class="cal-grid">
+          ${DOW.map(d=>`<div class="cal-dow">${d}</div>`).join('')}
+          ${calCells}
+        </div>
+        <div class="legend">
+          <span><span class="dot full"></span> บอกรักทั้งคู่</span>
+          <span><span class="dot half"></span> บอกรักคนเดียว</span>
+          <span><span class="dot none"></span> ยังไม่ได้บอก</span>
+        </div>
+      </div>
+    `;
+
+    app.querySelectorAll('.toggle-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=> toggle(btn.dataset.person, btn.dataset.field));
+    });
+    app.querySelectorAll('.gender-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=> setGender(btn.dataset.person, btn.dataset.g));
+    });
+    app.querySelectorAll('[data-action="pick-photo"]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        app.querySelector(`.photo-input[data-person="${btn.dataset.person}"]`).click();
+      });
+    });
+    app.querySelectorAll('.photo-input').forEach(inp=>{
+      inp.addEventListener('change', (e)=> handlePhotoChange(inp.dataset.person, e.target.files[0]));
+    });
+    app.querySelectorAll('[data-action="remove-photo"]').forEach(btn=>{
+      btn.addEventListener('click', ()=> removePhoto(btn.dataset.person));
+    });
+    document.getElementById('prevMonth').addEventListener('click', ()=>{
+      viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth()-1, 1);
+      render();
+    });
+    document.getElementById('nextMonth').addEventListener('click', ()=>{
+      viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth()+1, 1);
+      render();
+    });
+    document.getElementById('p1Name').addEventListener('change', async (e)=>{
+      profiles.p1.name = e.target.value.trim() || 'เธอ';
+      await saveProfiles();
+    });
+    document.getElementById('p2Name').addEventListener('change', async (e)=>{
+      profiles.p2.name = e.target.value.trim() || 'เขา';
+      await saveProfiles();
+    });
+  }
+
+  function escapeHtml(s){
+    return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  coupleCode = generateCode();
+  enterApp();
+})();
+</script>
+</body>
+</html>
